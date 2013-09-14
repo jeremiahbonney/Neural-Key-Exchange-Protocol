@@ -1,18 +1,18 @@
+# This file contains the Tree Parity Machine class, which is a key part of NKEP
+# It has a certain number of inputs, hidden nodes, and exactly 1 output node.
+# 
+
 import random
 
 class TPM:
-	input_num = 0
-	hidden_node_num = 0
-	weight_range = 0
-	weights = []
+
 
 	def __init__(self, input_num, hidden_node_num, weight_range):
-		while input_num % hidden_node_num != 0:
-			input_num += 1
 		self.input_num = input_num
 		self.weight_range = weight_range
 		self.hidden_node_num = hidden_node_num
 		random.seed()
+		self.weights = []
 		for x in xrange(input_num):
 			self.weights.append(random.randint(-weight_range, weight_range))
 
