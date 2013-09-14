@@ -43,6 +43,8 @@ class TPM:
 		print result, "result"
 		return result
 
+	def update_weights(self)
+
 	def print_weights(self):
 		for x in self.weights:
 			print x
