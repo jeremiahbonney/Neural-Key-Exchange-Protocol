@@ -4,6 +4,12 @@
 
 import random
 
+def big_theta(a, b):
+	if(a==b):
+		return 1
+	else:
+		return 0
+
 class TPM:
 
 
@@ -44,11 +50,41 @@ class TPM:
 		#print result, "result"
 		return result
 
-	def update_weights(self):
-		pass
+	def hebbian_learning_rule(self, inputs, out1, out2):
+		for x in xrange(self.input_num):
+			self.weights[x] += self.step2_arr[x/self.hidden_node_num]*inputs[x]*big_theta(self.step2_arr[x/self.hidden_node_num], out1)*big_theta(out1, out2)
+
+			if self.weights[x] > self.weight_range:
+				self.weights[x] = self.weight_range
+
+			if self.weights[x] < -self.weight_range:
+				self.weights[x] = -self.weight_range
+
+	def anti_hebbian_learning_rule(self, inputs, out1, out2):
+		for x in xrange(self.input_num):
+			self.weights[x] -= self.step2_arr[x/self.hidden_node_num]*inputs[x]*big_theta(self.step2_arr[x/self.hidden_node_num], out1)*big_theta(out1, out2)
+
+			if self.weights[x] > self.weight_range:
+				self.weights[x] = self.weight_range
+
+			if self.weights[x] < -self.weight_range:
+				self.weights[x] = -self.weight_range
+
+	def random_walk(self, inputs, out1, out2):
+		for x in xrange(self.input_num):
+			self.weights[x] += inputs[x]*big_theta(self.step2_arr[x/self.hidden_node_num], out1)*big_theta(out1, out2)
+
+			if self.weights[x] > self.weight_range:
+				self.weights[x] = self.weight_range
+
+			if self.weights[x] < -self.weight_range:
+				self.weights[x] = -self.weight_range
+
+		
+	
 
 	def print_weights(self):
-		for x in self.weights:
+		for x in self.weights: 
 			print x
 
 

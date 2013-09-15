@@ -10,17 +10,18 @@ y = TPM(30, 5, 10000)
 #y.output([1, 0, 1, -1, 1, 1, 0, -1])
 
 #print input_generator()
-z = 0
+
 counter = 0
-while z in xrange(3000):
+count = 0
+while counter < 40:
 	if key_exchange(x, y) == 1:
 		counter +=1
 	else:
 		counter = 0
-	z+=1
-	if counter >= 40:
-		print "weights should be synced after ", z, "iterations."
-		break
+	count +=1
+
+	
+print "weights should be synced after ", count , "iterations"
 
 x.print_weights()
 print "\n\n"
