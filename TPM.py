@@ -13,11 +13,12 @@ class TPM:
 		self.hidden_node_num = hidden_node_num
 		random.seed()
 		self.weights = []
+		self.step2_arr = []
 		for x in xrange(input_num):
 			self.weights.append(random.randint(-weight_range, weight_range))
 
 	def output(self, input_arr):
-		step2_arr = []
+		self.step2_arr = []
 		step_sum = 0
 		counter = 0
 		result = 1
@@ -25,22 +26,22 @@ class TPM:
 			step_sum+=input_arr[x] * self.weights[x]
 			if x % (self.input_num/self.hidden_node_num) != 0:
 				if step_sum > 0:
-					step2_arr.append(1)
+					self.step2_arr.append(1)
 				elif step_sum == 0:
-					step2_arr.append(0)
+					self.step2_arr.append(0)
 				else:
-					step2_arr.append(-1)
+					self.step2_arr.append(-1)
 				step_sum = 0
 
 
-		for y in step2_arr:
+		for y in self.step2_arr:
 			#print "step2_arr value is ", y
 			result *= y
 
 		if result == 0:
 			result = -1
 
-		print result, "result"
+		#print result, "result"
 		return result
 
 	def update_weights(self):
