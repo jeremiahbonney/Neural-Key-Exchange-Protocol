@@ -2,26 +2,22 @@ import random
 from TPM import *
 from NKEP import *
 
-x = TPM(30, 5, 10000)
+cutoff = 10
+
+x = TPM(100, 10, 100000)
 #x.print_weights()
 #x.output([1, 0, 1, -1, 1, 1, 0, -1])
-y = TPM(30, 5, 10000)
+y = TPM(100, 10, 100000)
 #y.print_weights()
 #y.output([1, 0, 1, -1, 1, 1, 0, -1])
 
 #print input_generator()
 
-counter = 0
-count = 0
-while counter < 40:
-	if key_exchange(x, y) == 1:
-		counter +=1
-	else:
-		counter = 0
-	count +=1
+synchronize(x, y, cutoff)
+for z in xrange(x.input_num):
+	if x.weights[z] != y.weights[z]:
+		print "Error! Weight number ", z, "is not the same for both machines!"
 
-	
-print "weights should be synced after ", count , "iterations"
 
 x.print_weights()
 print "\n\n"

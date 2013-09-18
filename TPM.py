@@ -20,9 +20,10 @@ class TPM:
 		random.seed()
 		self.weights = []
 		self.step2_arr = []
-		for x in xrange(input_num):
+		for x in xrange(input_num):  #Creates initial weights for the TPM randomly.
 			self.weights.append(random.randint(-weight_range, weight_range))
 
+	#Calculates the output of the TPM on a given input vector
 	def output(self, input_arr):
 		self.step2_arr = []
 		step_sum = 0
