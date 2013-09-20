@@ -40,6 +40,7 @@ def synchronize(TPM1, TPM2, cutoff):
 			x+=1
 		else:
 			x-=1
+	return 0
 
 # Checks if weights of two TPMs are actually secure. Run this after a synchronize
 # call to make sure the weights are actually synced
@@ -50,6 +51,9 @@ def check_weights(TPM1, TPM2):
 			return -1
 	return 0
 
+
+# This function actually runs the key exchange, prompting the users for input and then 
+# runs the key exchange until the weights are synced.
 
 def nkep():
 	input_size = int(raw_input("Enter the desired number of inputs for the networks\n"))
