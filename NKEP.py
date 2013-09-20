@@ -23,19 +23,33 @@ def key_exchange(TPM1, TPM2):
 	out2 = TPM2.output(inputs)
 	if out1 == out2:
 		#print "outputs the same"
-		TPM1.anti_hebbian_learning_rule(inputs, out1, out2)
-		TPM2.anti_hebbian_learning_rule(inputs, out2, out1)
+		TPM1.hebbian_learning_rule(inputs, out1, out2)
+		TPM2.hebbian_learning_rule(inputs, out2, out1)
 		return 1
 	return 0
 
+# Takes two TPM's and runs key exchange until they have equal output for 
+# cutoff number of times. 
+# Choosing a good cutoff is very important! Too small of a cutoff and the machines
+# may not be synchronized
 
 def synchronize(TPM1, TPM2, cutoff):
 	x = 0
 	while x < cutoff:
-		if key_exchange(TPM1, TPM2) == 1:
+		if key_exchange(TPM1, TPM2) == 1:   #goes until cutoff
 			x+=1
 		else:
 			x-=1
-	print "Both Tree Parity Machines are now synchronized"
+
+# Checks if weights of two TPMs are actually secure. Run this after a synchronize
+# call to make sure the weights are actually synced
+
+def check_weights(TPM1, TPM2):
+	for y in range(len(TPM1.weights)):
+		if TPM1.weights[y] != TPM2.weights[y]:
+			return -1
+	return 0
+
+	
 	
 

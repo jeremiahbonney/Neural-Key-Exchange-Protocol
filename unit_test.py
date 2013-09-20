@@ -2,7 +2,7 @@ import random
 from TPM import *
 from NKEP import *
 
-cutoff = 10
+cutoff = 30
 
 x = TPM(100, 10, 100000)
 #x.print_weights()
@@ -14,9 +14,10 @@ y = TPM(100, 10, 100000)
 #print input_generator()
 
 synchronize(x, y, cutoff)
-for z in xrange(x.input_num):
-	if x.weights[z] != y.weights[z]:
-		print "Error! Weight number ", z, "is not the same for both machines!"
+if check_weights(x, y) == -1:
+	print "Weights not synced!"
+else:
+	print "Weights are synced!"
 
 
 x.print_weights()
