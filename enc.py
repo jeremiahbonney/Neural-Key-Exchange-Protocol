@@ -42,21 +42,21 @@ def decrypt(TPM, TPM_other, ciphertext):
 	return xor_strings(key, ciphertext)
 
 
-y = TPM(100, 5, 1000)
-x = TPM(100, 5, 1000)
-synchronize(x, y, 1000)
+y = TPM(500, 25, 1000)
+x = TPM(500, 25, 1000)
+synchronize(x, y, 500)
 
-teststring = "Hi there lolololollllllllllllooooooooooooooolllllllllllllllllllllllllll"
-print teststring
+teststring = raw_input("Enter string to be encrypted: (Must be less than 500 characters):\n")
 x_c = TPM(1, 1, 1)
 y_c = TPM(1, 1, 1)
 x.fullcopy(x_c)
 y.fullcopy(y_c)
 key_exchange_one_only(x_c, y_c)
-print x.weights[3], x_c.weights[3]
 testenc = encrypt(y, x_c, teststring)
-print x.weights[1], x_c.weights[1]
-print testenc
-print decrypt(x, y_c, testenc)
 
+print "Encrypted text is: ", testenc, "\n"
+raw_input("Press enter to continue.")
+
+new_plain = decrypt(x, y_c, testenc)
+print "Decrypted text is: ", new_plain
 

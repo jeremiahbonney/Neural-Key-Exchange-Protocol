@@ -24,8 +24,7 @@ class TPM:
 			self.weights.append(random.randint(-weight_range, weight_range))
 
 	def fullcopy (self,new):
-		print "in copy"
-
+		
 		new.input_num = self.input_num
 		new.weight_range = self.weight_range
 		new.hidden_node_num = self.hidden_node_num
