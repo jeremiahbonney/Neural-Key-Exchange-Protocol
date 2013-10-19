@@ -1,9 +1,9 @@
 import random
 from TPM import *
 
-input_size = 100
-hidden_node_num = 10
-weight_range = 100000
+#input_size = 100
+#hidden_node_num = 10
+#weight_range = 100000
 
 
 
@@ -27,6 +27,18 @@ def key_exchange(TPM1, TPM2):
 		TPM2.hebbian_learning_rule(inputs, out2, out1)
 		return 1
 	return 0
+
+def key_exchange_one_only(TPM1, TPM2):
+	inputs = input_generator(TPM1.input_num, TPM1.weight_range)
+	out1 = TPM1.output(inputs)
+	out2 = TPM2.output(inputs)
+	if out1 == out2:
+		#print "outputs the same"
+		TPM1.hebbian_learning_rule(inputs, out1, out2)
+		#TPM2.hebbian_learning_rule(inputs, out2, out1)
+		return 1
+	return 0
+
 
 # Takes two TPM's and runs key exchange until they have equal output for 
 # cutoff number of times. 

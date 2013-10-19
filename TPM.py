@@ -1,7 +1,7 @@
 # This file contains the Tree Parity Machine class, which is a key part of NKEP
 # It has a certain number of inputs, hidden nodes, and exactly 1 output node.
 # 
-
+import copy
 import random
 
 def big_theta(a, b):
@@ -22,6 +22,22 @@ class TPM:
 		self.step2_arr = []
 		for x in xrange(input_num):  #Creates initial weights for the TPM randomly.
 			self.weights.append(random.randint(-weight_range, weight_range))
+
+	def fullcopy (self,new):
+		print "in copy"
+
+		new.input_num = self.input_num
+		new.weight_range = self.weight_range
+		new.hidden_node_num = self.hidden_node_num
+		new.weights = []
+		new.step2_arr = []
+
+		for x in range(new.input_num):
+			test = self.weights[x]
+			new.weights.append(test)
+		for y in range(new.hidden_node_num):
+			test = self.step2_arr[y]
+			new.step2_arr.append(y)
 
 	#Calculates the output of the TPM on a given input vector
 	def output(self, input_arr):
